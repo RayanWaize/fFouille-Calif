@@ -131,16 +131,12 @@ function MenuFouille()
             if IsEntityPlayingAnim(searchPlayerPed, 'random@mugging3', 'handsup_standing_base', 3) or IsEntityPlayingAnim(searchPlayerPed, 'mp_arresting', 'idle', 3) then
             RageUI.ButtonWithStyle("Escorter", nil, {RightLabel = "→"}, true, function(Hovered, Active, Selected)
                 if (Selected) then
-                    local target, distance = ESX.Game.GetClosestPlayer()
-                    playerheading = GetEntityHeading(GetPlayerPed(-1))
-                    playerlocation = GetEntityForwardVector(PlayerPedId())
-                    playerCoords = GetEntityCoords(GetPlayerPed(-1))
-                    local target_id = GetPlayerServerId(target)
-                    if closestPlayer ~= -1 and closestDistance <= 3.0 then  
-                    TriggerServerEvent('fellow:drag', GetPlayerServerId(player))
-            else
-                ESX.ShowNotification('Aucun joueurs à proximité')
-            end
+				local player, distance = ESX.Game.GetClosestPlayer()
+				if distance ~= -1 and distance <= 3.0 then
+					TriggerServerEvent('fellow:drag', GetPlayerServerId(player))
+				else
+					ESX.ShowNotification('~r~Aucun joueur~s~ à proximité')
+				end
             end
         end)
         end
