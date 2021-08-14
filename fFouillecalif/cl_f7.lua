@@ -208,20 +208,35 @@ function MenuFouille()
                 end)
             end
     
-            RageUI.Separator("↓ ~r~Objets / Armes ~s~↓")
-            for k,v  in pairs(Items) do
-                RageUI.ButtonWithStyle(v.label, nil, {RightLabel = "~g~x"..v.right}, true, function(_, _, s)
-                    if s then
-                        local combien = KeyboardInput("Combien ?", '' , '', 8)
-                        if tonumber(combien) > v.amount then
-                            RageUI.Popup({message = "~r~Quantité invalide"})
-                        else
-                            TriggerServerEvent('fellow:confiscatePlayerItem', GetPlayerServerId(closestPlayer), v.itemType, v.value, tonumber(combien))
-                        end
-                        RageUI.GoBack()
-                    end
-                end)
-            end
+		RageUI.Separator("↓ ~g~Objets ~s~↓")
+		for k,v  in pairs(Items) do
+			RageUI.ButtonWithStyle(v.label, nil, {RightLabel = "~g~x"..v.right}, true, function(_, _, s)
+				if s then
+					local combien = KeyboardInput("Combien ?", '' , '', 8)
+					if tonumber(combien) > v.amount then
+						RageUI.Popup({message = "~r~Quantité invalide"})
+					else
+						TriggerServerEvent('fellow:confiscatePlayerItem', GetPlayerServerId(closestPlayer), v.itemType, v.value, tonumber(combien))
+					end
+					RageUI.GoBack()
+				end
+			end)
+		end
+			RageUI.Separator("↓ ~g~Armes ~s~↓")
+
+			for k,v  in pairs(Armes) do
+				RageUI.ButtonWithStyle(v.label, nil, {RightLabel = "avec ~g~"..v.right.. " ~s~balle(s)"}, true, function(_, _, s)
+					if s then
+						local combien = KeyboardInput("Combien ?", '' , '', 8)
+						if tonumber(combien) > v.amount then
+							RageUI.Popup({message = "~r~Quantité invalide"})
+						else
+							TriggerServerEvent('fellow:confiscatePlayerItem', GetPlayerServerId(closestPlayer), v.itemType, v.value, tonumber(combien))
+						end
+						RageUI.GoBack()
+					end
+				end)
+			end
     
             end, function() 
             end)
