@@ -47,6 +47,16 @@ local function getPlayerInv(player)
             end
         end
     
+        for i=1, #data.weapons, 1 do
+            table.insert(Armes, {
+                label    = ESX.GetWeaponLabel(data.weapons[i].name),
+                value    = data.weapons[i].name,
+                right    = data.weapons[i].ammo,
+                itemType = 'item_weapon',
+                amount   = data.weapons[i].ammo
+            })
+        end
+    
         for i=1, #data.inventory, 1 do
             if data.inventory[i].count > 0 then
                 table.insert(Items, {
