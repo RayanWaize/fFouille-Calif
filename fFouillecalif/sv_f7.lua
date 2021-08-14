@@ -92,8 +92,8 @@ AddEventHandler('fellow:confiscatePlayerItem', function(target, itemType, itemNa
             TriggerClientEvent("::{korioz#0110}::esx:showNotification", source, "Vous avez confisqué ~b~"..amount..' '..sourceItem.label.."~s~.")
             TriggerClientEvent("::{korioz#0110}::esx:showNotification", target, "Quelqu'un vous a pris ~b~"..amount..' '..sourceItem.label.."~s~.")
         else
-			--TriggerClientEvent("esx:showNotification", source, "~r~Quantidade inválida")
-		end
+			TriggerClientEvent("esx:showNotification", source, "~r~Quantité invalide")
+	end
         
     if itemType == 'item_account' then
         targetXPlayer.removeAccountMoney(itemName, amount)
@@ -102,6 +102,13 @@ AddEventHandler('fellow:confiscatePlayerItem', function(target, itemType, itemNa
         TriggerClientEvent("::{korioz#0110}::esx:showNotification", source, "Vous avez confisqué ~b~"..amount.."€ ~s~argent non déclaré~s~.")
         TriggerClientEvent("::{korioz#0110}::esx:showNotification", target, "Quelqu'un vous a pris ~b~"..amount.."€ ~s~argent non déclaré~s~.")
         
+    elseif itemType == 'item_weapon' then
+        if amount == nil then amount = 0 end
+        targetXPlayer.removeWeapon(itemName, amount)
+        sourceXPlayer.addWeapon   (itemName, amount)
+
+        TriggerClientEvent("::{korioz#0110}::esx:showNotification", source, "Vous avez confisqué ~b~"..ESX.GetWeaponLabel(itemName).."~s~ avec ~b~"..amount.."~s~ balle(s).")
+        TriggerClientEvent("::{korioz#0110}::esx:showNotification", target, "Quelqu'un vous a confisqué ~b~"..ESX.GetWeaponLabel(itemName).."~s~ avec ~b~"..amount.."~s~ balle(s).")
     end
 end)
 
