@@ -247,21 +247,6 @@ function MenuFouille()
         end
     end
 
-Keys.Register('F7', 'fouille', 'Ouvrir le menu fouille', function()
-                local closestPlayer, closestDistance = ESX.Game.GetClosestPlayer()
-            local target, distance = ESX.Game.GetClosestPlayer()
-                        playerheading = GetEntityHeading(GetPlayerPed(-1))
-                        playerlocation = GetEntityForwardVector(PlayerPedId())
-                        playerCoords = GetEntityCoords(GetPlayerPed(-1))
-                        local target_id = GetPlayerServerId(target)
-                        local searchPlayerPed = GetPlayerPed(target)
-                        if IsEntityPlayingAnim(searchPlayerPed, 'random@mugging3', 'handsup_standing_base', 3) and closestPlayer ~= -1 and closestDistance <= 3.0 then
-    MenuFouille()
-else
-    ESX.ShowNotification('Aucun joueurs à proximité ou personne lève les bras')
-end
-end)
-
 
 function carteidentite(player)
     local StockFouille = RageUI.CreateMenu("Carte d'identité", "Informations")
